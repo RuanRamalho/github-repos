@@ -1,6 +1,8 @@
 import { React, useState } from 'react';
 import { Container } from 'react-bootstrap';
+
 import api from './services/api';
+import Form from './components/Form';
 
 function App() {
   const [repositories, setRepositories] = useState([]);
@@ -29,10 +31,8 @@ function App() {
   return (
     <>
       <Container>
-        <form onSubmit={listRepos}>
-          <input type="text" value={user} onChange={handleInput} />
-          <button type="submit">Search</button>
-        </form>
+        <Form listRepos={listRepos} handleInput={handleInput} />
+
         {showRepos && (
           <ul>
             {repositories.map((repos) => (
@@ -40,6 +40,7 @@ function App() {
             ))}
           </ul>
         )}
+
         {errorMessageApi && <h1>Error 404</h1>}
       </Container>
     </>
